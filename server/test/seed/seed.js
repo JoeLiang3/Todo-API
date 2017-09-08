@@ -22,22 +22,22 @@ const users = [{
 }, {
   _id: userTwoId,
   email: "Lana@gmail.com",
-  password: "userTwoPassword"
-
+  password: "userTwoPassword",
+  tokens: [{
+    access: "auth",
+    token: jwt.sign({_id: userTwoId, access: "auth"}, "abc123").toString()
+  }]
 }];
 
 //todos
 const todos = [{
     _id: new ObjectID(),
-    text: "Game of thrones"
+    text: "Game of thrones",
+    _creator: userOneId
   },{
     _id: new ObjectID(),
-    text: "Hello its me"
-  },{
-    _id: new ObjectID(),
-    text: "Boku no Hero",
-    completed: true,
-    completedAt: 333
+    text: "Hello its me",
+    _creator: userTwoId
   }];
 
   const populateTodos = (done) => {
