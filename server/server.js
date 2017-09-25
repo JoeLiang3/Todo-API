@@ -1,6 +1,8 @@
 require('./config/config');
 
 const _ = require('lodash');
+const fs = require('fs');
+var path    = require("path");
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -17,6 +19,13 @@ const port = process.env.PORT || 3000;
 var app = express();
 
 app.use(bodyParser.json());
+
+
+app.get('/', (req, res) => {
+  // res.send('<h1>Hello Express!</h1>');
+  res.sendFile(path.join(__dirname+'/../public/index.html'));
+});
+
 
 app.post('/todos', authenticate, (req, res) => {
   var todo = new Todo({
